@@ -49,6 +49,9 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 				if p.Provider.Token != "" {
 					return d.Err("API token already set")
 				}
+				if !d.NextArg() {
+					return d.ArgErr()
+				}
 				p.Provider.Token = d.Val()
 				if d.NextArg() {
 					return d.ArgErr()
